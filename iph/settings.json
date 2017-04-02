@@ -7,39 +7,39 @@
         }, 
         {
             "enabled": true, 
-            "name": "main", 
-            "path": "__main__"
-        }, 
-        {
-            "enabled": false, 
-            "name": "sys modules", 
-            "path": "sys.modules"
-        }, 
-        {
-            "enabled": true, 
             "name": "System .Net", 
             "path": "System"
         }, 
         {
-            "enabled": false, 
+            "enabled": true, 
             "name": "Microsoft", 
             "path": "Microsoft"
-        }, 
-        {
-            "enabled": false, 
-            "name": "CLR", 
-            "path": "clr.References"
         }, 
         {
             "enabled": true, 
             "name": "IronPython", 
             "path": "IronPython"
+        }, 
+        {
+            "enabled": true, 
+            "name": "__main__", 
+            "path": "__main__"
+        }, 
+        {
+            "enabled": false, 
+            "name": " Modules sys", 
+            "path": "sys.modules"
+        }, 
+        {
+            "enabled": false, 
+            "name": "CLR", 
+            "path": "clr.References"
         }
     ], 
     "window": {
-        "Height": 661.0, 
-        "Left": 30.0, 
-        "Top": 199.0, 
-        "Width": 896.0
+        "Height": 671.0, 
+        "Left": 286.0, 
+        "Top": 216.0, 
+        "Width": 1080.0
     }
 }

@@ -52,6 +52,8 @@ class ModelView(BaseNotifier):
         try:
             if len(self.tabs_list) > 1:
                 self.tabs_list.Remove(item)
+                item.datagrid = None
+                item = None
                 gc.collect()
 
         except Exception as error:
@@ -84,6 +86,7 @@ class ModelView(BaseNotifier):
         ''' Cleans suggestions list on the left dock
         '''
         self.autocompl.Clear()
+        gc.collect()
 
     def update_autocompl(self, text):
         ''' refresh list with the new string to found
