@@ -194,7 +194,7 @@ TYPES_TABLE = {
                'category' : 'event',
              'members' : None,
              'value' : get_std_value,
-             'doc' : get_doc
+             'doc' : get_rout_event_doc
              },
 
 'BoundEvent':{'icon': 'interface',

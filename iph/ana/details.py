@@ -34,10 +34,25 @@ def get_event_doc(refobject):
     '''
     return refobject.Event.__doc__
 
+def get_rout_event_doc(refobject):
+    '''
+    '''
+    try:
+        doc = refobject.Name
+        doc += '\nHandler Type: ' + str(refobject.HandlerType)
+        doc += '\nOwner Type: ' + str(refobject.OwnerType)
+        doc += '\nRouting Strategy : ' + str(refobject.RoutingStrategy)
+    except Exception as error:
+        logger.debug('function get_rout_event_doc :'+str(error))
+        doc = get_doc(refobject)
+    return doc
+
 def get_indexer_doc(refobject): #
     ''' indexer  getset_descriptor
     '''
-    return refobject.PropertyType.__doc__
+    doc = get_doc(refobject)
+    doc += '\n' + refobject.PropertyType.__doc__
+    return doc
 
 def get_std_doc(refobject):
     ''' str, bool int float ...

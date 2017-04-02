@@ -50,7 +50,7 @@ class TabViewItem(BaseNotifier):
                         self.model.type, 
                         sys.getsizeof(ref))
         self.maindoc += '\nGetType() : ' + str(clr.GetClrType(type(ref)))
-        self.maindoc += '\n'*2 + self.model.templ_value(ref)
+        self.maindoc += '\n'*2 + str(self.model.templ_value(ref))
         self.maindoc += '\n'*2 + str(self.model.templ_doc(ref))
         
 

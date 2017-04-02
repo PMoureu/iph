@@ -71,6 +71,7 @@
     <Content Include="iph\core\ui.xaml" />
     <Content Include="iph\doc\capture.png" />
     <Content Include="iph\doc\scheme.md" />
+    <Content Include="iph\FIXME.txt" />
     <Content Include="iph\img\collec.png" />
     <Content Include="iph\img\constru.png" />
     <Content Include="iph\img\default.png" />
