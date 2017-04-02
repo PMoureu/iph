@@ -1,4 +1,5 @@
 import clr
+import gc
 from System.Collections.ObjectModel import ObservableCollection
 from iph.utils.dialogs import *
 from iph import logger
@@ -51,7 +52,8 @@ class ModelView(BaseNotifier):
         try:
             if len(self.tabs_list) > 1:
                 self.tabs_list.Remove(item)
-                
+                gc.collect()
+
         except Exception as error:
             logger.error('Error close_tab : ' + str(error))
 
@@ -87,6 +89,7 @@ class ModelView(BaseNotifier):
         ''' refresh list with the new string to found
         '''
         self.autocompl.Clear()
+        gc.collect()
         for base_api in self.treemanager.list_options:
             if isinstance(base_api.index_module, dict):
                 for key, dictoption in base_api.index_module.items():

@@ -1,5 +1,6 @@
 import sys
 import clr
+import gc
 from System.Collections.ObjectModel import ObservableCollection
 from iph import logger
 from config import img_tree
@@ -66,7 +67,7 @@ class TabViewItem(BaseNotifier):
         ''' refresh grid rows from new model/new template filters
         '''
         self.datagrid = []
-
+        gc.collect()
         try:
             for model in self.model.get_members():
                 try:

@@ -176,7 +176,7 @@ class NodeBase(BaseNotifier):
         '''
         self.is_filled = True
         self.members.Clear()
-        
+        gc.collect()
         for newmodel in self.model.get_members():
             try:
                 node = NodeBase(newmodel, self)
@@ -186,7 +186,7 @@ class NodeBase(BaseNotifier):
                     self.model.name, self.model.type, error))
 
             self.members.Add(node)
-        gc.collect()
+        
 
     #get/set for expand control
     def get_expand(self):
