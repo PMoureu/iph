@@ -7,7 +7,7 @@ The reader provides an extended view of APIs, extracts internal doc
 and allows to sort/filter what you're looking for.
 That's the first goal.
 
-![](iph\doc\capture.png)
+![](iph/doc/capture.png)
 
 The second usage is a kind of debug mode, a visual representation of some running code. 
 It can replace the usual logs with print() to display much more details 
@@ -51,9 +51,6 @@ iph.go(any_object_in_a_script) # direct inspection
   
     --> right-click  > open with > ironpythonconsole
 
-
-An index engine is available for autocompletion, still in work but it's quite effective.
-Please avoid this function on python modules, brakes are broken!
 
 
 
@@ -117,7 +114,8 @@ iph.go(var_after)
 - Filter the rows in datagrid or change the template to display all members
 
 - Analysis and output details are based on templates, so it's easy to add new types/behaviors for more accuracy.
-
+- An index engine is available for autocompletion, still in work but it's quite effective.
+Please avoid this function on python modules, brakes are broken!
 - if you want test the debug mode to contribute :
   - launch iph with iph.debug() 
   - press F10 on some selected controls to display details
@@ -145,5 +143,7 @@ Any contribution is welcome by the way.
 
 ## Many Thanks to:
 - [IronPython Team](https://github.com/IronLanguages)
-- Gui Talarico 
+- [Gui Talarico ](https://github.com/gtalarico) for the tool [RPW](https://github.com/gtalarico/revitpythonwrapper)
+- [Daren Thomas](https://github.com/daren-thomas) for the tool [RPS](https://github.com/architecture-building-systems/revitpythonshell)
+- [Ehsan Iran-Nejad](https://github.com/eirannejad) for the tool [PyRevit](http://eirannejad.github.io/pyRevit/)
 - [Icon8](https://icons8.com/) : some icons come from their collection
