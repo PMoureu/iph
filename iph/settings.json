@@ -1,0 +1,45 @@
+{
+    "api_set": [
+        {
+            "enabled": false, 
+            "name": "Revit", 
+            "path": "Autodesk.Revit"
+        }, 
+        {
+            "enabled": true, 
+            "name": "main", 
+            "path": "__main__"
+        }, 
+        {
+            "enabled": false, 
+            "name": "sys modules", 
+            "path": "sys.modules"
+        }, 
+        {
+            "enabled": true, 
+            "name": "System .Net", 
+            "path": "System"
+        }, 
+        {
+            "enabled": false, 
+            "name": "Microsoft", 
+            "path": "Microsoft"
+        }, 
+        {
+            "enabled": false, 
+            "name": "CLR", 
+            "path": "clr.References"
+        }, 
+        {
+            "enabled": true, 
+            "name": "IronPython", 
+            "path": "IronPython"
+        }
+    ], 
+    "window": {
+        "Height": 661.0, 
+        "Left": 437.0, 
+        "Top": 177.0, 
+        "Width": 896.0
+    }
+}

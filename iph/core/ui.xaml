@@ -1,0 +1,370 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="iph"
+    Height="600" Width="600" Left="10" Top="100"
+    >
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="bool_converter"/>
+    </Window.Resources>
+
+    <DockPanel Margin="5,5,5,5"
+               KeyDown="ui_main_keydown"
+               >
+        
+<!-- TOOLBAR-->
+        <WrapPanel Margin="4" DockPanel.Dock="Top">
+            <DockPanel Width="210" Margin="4,0"
+                        VerticalAlignment="Center">
+                
+                <TextBox Text="Search" 
+                            TextChanged="on_filterbox_textChanged"
+                            Height="25" Width="180"
+                            VerticalAlignment="Top"
+                            Visibility="Visible"/>
+
+                <Button x:Name="ui_filter_button" 
+                    Content="Go"
+                    VerticalAlignment="Top"
+                    Width="30" 
+                    Click="on_filterbutton_click"
+                    />
+            </DockPanel>
+            
+            <Border  x:Name="ui_options_api"
+                     Height="30" Width="30"
+                     BorderThickness="0"
+                     BorderBrush="Gray"
+                     MouseDown="on_click_options"
+                     Padding="2"
+                     Margin="4,0,20,0">
+                <Image 
+                    Source="{StaticResource class}"
+                    Height="28"
+                    />
+            </Border>
+            
+            <Button x:Name="ui_debug_button" 
+                    Content="Dbg" 
+                    Margin="4,0,20,0" Width="40"
+                    Visibility="{Binding Source={StaticResource mode_dbg}, 
+                                    Converter={StaticResource bool_converter}}"
+                    Click="on_debug_click"
+                    />
+            <ComboBox x:Name="ui_logger" 
+                      ItemsSource="{Binding log_errors}"
+                      Width="300" Margin="4,0"
+                      IsEditable="True"
+                      Visibility="{Binding Source={StaticResource mode_dbg}, 
+                                    Converter={StaticResource bool_converter}}"
+                      DropDownOpened="ui_logger_Selected">
+
+            </ComboBox>
+
+        </WrapPanel>
+        
+<!-- Search list (collapsed)-->
+
+        <ListView x:Name="ui_search_options"
+                   ItemsSource="{Binding autocompl}"
+                    Width="280" Margin="0,0,10,0"
+                    VerticalAlignment="Stretch"
+                    Visibility="Collapsed"
+                    >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel MouseDown="on_suggestion_selected"
+                                Height="30" Width="250">
+                        <Label Content="{Binding title}"
+                               Height="15" Padding="0"
+                               VerticalAlignment="Top"
+                             FontWeight="DemiBold"
+                           />
+                        <Label Content="{Binding refpath}"
+                               Height="15" Padding="0"
+                               FontSize="10" Margin="10,0"
+                               VerticalAlignment="Top"
+                           />
+                    </StackPanel>
+                    
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+<!-- Options API (collapsed)-->
+
+        <ListView x:Name="ui_roots_options"
+                  DataContext="{Binding treemanager}"
+                    ItemsSource="{Binding list_options, Mode=TwoWay}"
+                    Width="310" Margin="0,0,10,0"
+                    VerticalAlignment="Stretch"
+                    Visibility="Collapsed"
+                    >
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="Focusable" Value="False"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+
+            <ListView.ItemTemplate >
+                <DataTemplate>
+                    <DockPanel Width="300" Height="60"
+                               KeyDown="on_optionapi_path_check"
+                               Margin="5"
+                                    >
+                        <CheckBox x:Name="ui_opt_enabled"
+                            IsChecked="{Binding enabled, Mode=TwoWay}"
+                                  DockPanel.Dock="Left"
+                                  Margin="10,10"
+                                  VerticalAlignment="Center"
+                                  />
+                        <StackPanel>
+                            <TextBlock Text="Index"
+                                       Width="40" 
+                                       Foreground="Gray"
+                                   FontSize="11" FontStyle="Italic"/>
+
+                            <CheckBox IsChecked="{Binding index_enabled, Mode=TwoWay}"
+                                  DockPanel.Dock="Left"
+                                  Margin="10,10"
+                                  VerticalAlignment="Center"
+                                  />
+                        </StackPanel>
+
+                        <TextBox 
+                                Text="{Binding name, Mode=TwoWay}"
+                                 DockPanel.Dock="Top"
+                                 HorizontalAlignment="Left"
+                                 Width="200" Margin="4,4"
+                                 FontWeight="Bold" FontSize="12"
+                                   />
+                        <WrapPanel DockPanel.Dock="Bottom">
+                            <TextBlock Text="Hook :"
+                                       VerticalAlignment="Center"
+                                       Width="40" Margin="4,4"
+                                       Foreground="Gray"
+                                   FontSize="11" FontStyle="Italic"/>
+
+                            <TextBox Text="{Binding path, Mode=TwoWay}"
+                                 Width="150" Margin="4,4"
+                                 FontSize="11" FontStyle="Italic"
+                                   />
+                        </WrapPanel>
+                    </DockPanel >
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+<!-- CLOSE BUTTON -->
+        <Button x:Name="ui_close" 
+                Content="Close" 
+                DockPanel.Dock="Bottom" Height="30"
+                Click="on_button_close" />
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="60*"/>
+            </Grid.ColumnDefinitions>
+            
+<!-- TREE -->
+            <TreeView x:Name="ui_treeview"
+                      DataContext="{Binding treemanager}"
+                      ItemsSource="{Binding list_roots, Mode=TwoWay}"
+                      Background="WhiteSmoke"
+                      SelectedItemChanged="on_node_select"
+                      KeyDown="on_keydown_tree"
+                      VirtualizingStackPanel.VirtualizationMode="Recycling">
+                
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate DataType="{x:Type TreeViewItem}" 
+                                                  ItemsSource="{Binding members, Mode=TwoWay}">
+                            <StackPanel Orientation="Horizontal">
+                                    <Image Source="{Binding model.icon}"
+                                           Margin="0,1"
+                                           Height="16"/>
+                                
+                                    <TextBlock Text="{Binding model.name}" 
+                                               Margin="4,0"/>
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
+                
+                    <TreeView.ItemContainerStyle>
+                        <Style TargetType="{x:Type TreeViewItem}"
+                               >
+                          <Setter Property="IsExpanded" 
+                                  Value="{Binding IsExpanded, Mode=TwoWay}"/>
+                          <Setter Property="IsSelected" 
+                                  Value="{Binding IsSelected, Mode=TwoWay}"/>
+                    </Style>
+                    </TreeView.ItemContainerStyle>
+            </TreeView>
+
+            <GridSplitter Grid.Column="1" 
+                          Width="10"
+                          HorizontalAlignment="Stretch"/>
+            
+<!-- TABS CONTROL -->
+
+                <TabControl x:Name="ui_tabs_control"
+                            Grid.Column="2"
+                            ItemsSource="{Binding Path=tabs_list, Mode=TwoWay}"
+                            >
+                    <TabControl.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel HorizontalAlignment="Stretch">
+                                <Image Width="15" Margin="2"
+                                       Source="{Binding model.icon}"/>
+                                <TextBlock Text="{Binding model.name}" 
+                                           Width="80"
+                                           DockPanel.Dock="Left"
+                                           Margin="3"
+                                           />
+
+                                <TextBlock Text="X"
+                                            Width="12" Height="13"
+                                            DockPanel.Dock="Right"
+                                            MouseDown="on_close_tab"
+                                            TextAlignment="Center" FontWeight="Bold" FontSize="10"
+                                            VerticalAlignment="Center">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" 
+                                                             Value="True">
+                                                        <Setter Property="Background" 
+                                                                Value="LightBlue" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                            </TextBlock>
+                        </DockPanel>
+
+                        </DataTemplate>
+                    </TabControl.ItemTemplate>
+                    <TabControl.ContentTemplate>
+
+                        <DataTemplate>
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20*" />
+                                    <RowDefinition Height="5" />
+                                    <RowDefinition Height="80*" />
+                                </Grid.RowDefinitions>
+<!-- MAIN DOC -->
+                            <TextBox  x:Name="ui_tips_box"
+                                      Text="{Binding maindoc}" 
+                                      Background="AliceBlue"
+                                      VerticalScrollBarVisibility="Auto"/>
+
+                            <GridSplitter Grid.Row="1" 
+                                          HorizontalAlignment="Stretch">
+                            </GridSplitter>
+<!-- TAB FILTERS -->
+                            <DockPanel Grid.Row="2" >
+                                <ProgressBar x:Name="ui_progressbar"
+                                             DockPanel.Dock="Top"
+                                             Minimum="0" Maximum="100"
+                                             Value="{Binding progress }" />
+                                
+                                <WrapPanel DockPanel.Dock="Top">
+                                    <TextBox Text="Filter"
+                                         Width="150" Margin="2,2,10,2"
+                                         HorizontalAlignment="Left"
+                                         TextChanged="on_filter_txt_tab"
+                                         />
+                                    
+                                    <ComboBox ItemsSource="{Binding options_templates}"
+                                              Width="100" Height="24" FontSize="10"
+                                              Padding="0"
+                                              SelectionChanged="on_filter_select">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding name}"/>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                </WrapPanel>
+<!-- DATA GRID -->
+                                <DataGrid x:Name="ui_gridview"
+                                      ItemsSource="{Binding datagrid}"
+                                      AutoGenerateColumns="False"
+                                      RowHeight="22"
+                                      RowDetailsVisibilityChanged="on_row_select"
+                                      >
+<!-- DATA GRID  HEADERS-->
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Header=""
+                                                                Width="25">
+                                        <DataGridTemplateColumn.CellTemplate >
+                                            <DataTemplate>
+                                                <Image Source="{Binding model.icon}"    
+                                                               Width="16"
+                                                               HorizontalAlignment="Center"
+                                                               MouseDown="on_rowicon_click"
+                                                            />
+
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn Header="Name" 
+                                                Binding="{Binding model.name}"
+                                                Width="40*"
+                                                FontWeight="Bold"
+                                                />
+
+                                    <DataGridTextColumn Header="Cat." 
+                                                Binding="{Binding model.category}"
+                                                Width="70"
+                                                />
+                                    <DataGridTextColumn Header="Value" 
+                                                Binding="{Binding short_value}"
+                                                Width="60*"
+                                                />
+
+                                    <DataGridTextColumn Header="Type" 
+                                                Binding="{Binding model.type}"
+                                                Width="100"
+                                                />
+
+                                </DataGrid.Columns>
+                                <DataGrid.RowStyle>
+                                    <Style TargetType="DataGridRow">
+                                        <Setter Property="Background" Value="Azure"/>
+                                    </Style>
+                                </DataGrid.RowStyle>
+                                    
+<!-- DATA GRID DETAILS-->
+                                <DataGrid.RowDetailsTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Background="WhiteSmoke"
+                                                    HorizontalAlignment="Left"
+                                                    Width="800">
+                                            <TextBox Text="{Binding doc}" 
+                                                    Margin="10,10"
+                                                    MaxHeight="150"
+                                                    TextWrapping="Wrap"
+                                                    VerticalScrollBarVisibility="Auto">
+                                            </TextBox>
+                                            <TextBox Text="{Binding value}" 
+                                                    Margin="10,10"
+                                                    TextWrapping="WrapWithOverflow"
+                                                    MaxHeight="150"
+                                                    VerticalScrollBarVisibility="Auto">
+                                            </TextBox>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGrid.RowDetailsTemplate>
+                            </DataGrid>
+                            </DockPanel>
+                            
+                        </Grid>
+                        </DataTemplate>
+                    </TabControl.ContentTemplate>
+                </TabControl>
+            </Grid>
+    </DockPanel>
+</Window>

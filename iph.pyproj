@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>75b3b8ce-764e-4cf8-bba1-fff5fa3298cf</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>launcher.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <IsWindowsApplication>True</IsWindowsApplication>
+    <InterpreterId>{80659ab7-4d53-4e0c-8588-a766116cbd46}</InterpreterId>
+    <LaunchProvider>IronPython (.NET) launcher</LaunchProvider>
+    <InterpreterVersion>2.7</InterpreterVersion>
+    <OutputPath>.</OutputPath>
+    <Name>iph</Name>
+    <RootNamespace>iph</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="iph\ana\analysis.py" />
+    <Compile Include="iph\ana\anatable.py" />
+    <Compile Include="iph\ana\details.py" />
+    <Compile Include="iph\ana\excluds.py" />
+    <Compile Include="iph\core\treeoption.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="iph\tests\test_04_tabs.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="iph\utils\indextools.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="iph\ana\members.py" />
+    <Compile Include="iph\ana\syshook.py" />
+    <Compile Include="iph\ana\__init__.py" />
+    <Compile Include="iph\core\basemodel.py" />
+    <Compile Include="iph\core\config.py" />
+    <Compile Include="iph\core\modelview.py" />
+    <Compile Include="iph\core\tabs.py" />
+    <Compile Include="iph\core\tree.py" />
+    <Compile Include="iph\core\ui.py" />
+    <Compile Include="iph\core\__init__.py" />
+    <Compile Include="iph\main.py" />
+    <Compile Include="iph\tests\test_00_manager.py" />
+    <Compile Include="iph\tests\test_01_model.py" />
+    <Compile Include="iph\tests\test_02_hooks.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="iph\tests\test_03_analys.py" />
+    <Compile Include="iph\tests\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="iph\utils\dialogs.py" />
+    <Compile Include="iph\utils\logger.py" />
+    <Compile Include="iph\utils\tools.py" />
+    <Compile Include="iph\utils\__init__.py" />
+    <Compile Include="iph\__init__.py" />
+    <Compile Include="launcher.py" />
+    <Compile Include="run_tests.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="iph\core\ui.xaml" />
+    <Content Include="iph\doc\capture.png" />
+    <Content Include="iph\doc\scheme.md" />
+    <Content Include="iph\img\collec.png" />
+    <Content Include="iph\img\constru.png" />
+    <Content Include="iph\img\default.png" />
+    <Content Include="iph\img\dict.png" />
+    <Content Include="iph\img\interface.png" />
+    <Content Include="iph\img\list.png" />
+    <Content Include="iph\img\modul.png" />
+    <Content Include="iph\img\modulc.png" />
+    <Content Include="iph\img\prope.png" />
+    <Content Include="iph\img\unknown.png" />
+    <Content Include="iph\img\xfunc.png" />
+    <Content Include="iph\session.log" />
+    <Content Include="iph\settings.json" />
+    <Content Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <Name>PresentationCore</Name>
+      <AssemblyName>PresentationCore.dll</AssemblyName>
+      <HintPath>$(ProgramFiles)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\PresentationCore.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PresentationFramework, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <Name>PresentationFramework</Name>
+      <AssemblyName>PresentationFramework.dll</AssemblyName>
+      <HintPath>$(ProgramFiles)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\PresentationFramework.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="WindowsBase, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <Name>WindowsBase</Name>
+      <AssemblyName>WindowsBase.dll</AssemblyName>
+      <HintPath>$(ProgramFiles)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\WindowsBase.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xaml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <Name>System.Xaml</Name>
+      <AssemblyName>System.Xaml.dll</AssemblyName>
+      <HintPath>$(ProgramFiles)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xaml.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="{80659ab7-4d53-4e0c-8588-a766116cbd46}\2.7" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="iph\" />
+    <Folder Include="iph\ana\" />
+    <Folder Include="iph\core\" />
+    <Folder Include="iph\doc\" />
+    <Folder Include="iph\img\" />
+    <Folder Include="iph\tests\" />
+    <Folder Include="iph\utils\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
+  </PropertyGroup>
+  <Import Condition="Exists($(PtvsTargetsFile))" Project="$(PtvsTargetsFile)" />
+  <Import Condition="!Exists($(PtvsTargetsFile))" Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
+  <!-- Uncomment the CoreCompile target to enable the Build command in
+       Visual Studio and specify your pre- and post-build commands in
+       the BeforeBuild and AfterBuild targets below. -->
+  <!--<Target Name="CoreCompile" />-->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+</Project>

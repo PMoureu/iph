@@ -1,0 +1,6 @@
+
+- press * on roots treenode or module
+
+- add/remove  options in treemanager
+- way to distinc python event/method
+- revit : app exceptions handle /closing app
