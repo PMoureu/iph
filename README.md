@@ -1,23 +1,44 @@
 # iph - Ironic Python Helper
 
 Half lookup, half doc reader, half visual debugger, these 3 halves are helpfull 
-when you're dealing with huge frameworks (Python or C# libs).
+when you're dealing with huge .NET frameworks or Python modules.
 
-The reader provides an extended view of APIs, extracts internal doc 
-and allows to sort/filter what you're looking for.
-That's the first goal.
+In few words, iph extracts doc and also provides a visual representation of any object called in a Python script.
 
+You can apply this to :
+- __Read APIs doc like a .chm reader:__ 
+  - It extracts internal doc of all classes and attributes
+  - It offers an offline access to doc (faster ?)
+  - It allows to focus/sort/filter specific names easily
+  
 ![](iph/doc/capture.png)
 
-The second usage is a kind of debug mode, a visual representation of some running code. 
-It can replace the usual logs with print() to display much more details 
-and give an easy access to related classes/attributes.
-You just need to insert snapshots in your scripts (refer to the below example).
+- __Get Objects informations in the context of a running application like Revit:__
+
+  - Really helpfull if you have access to a shell/console (or by pluging the launcher to any macro)
+  - Direct access to doc, plus it displays values of attributes
+
+![](iph/doc/capture_revit.png)
+
+- __Debug or Flesh out any object/class in a script:__
+
+  - It replaces usual logs with print()
+  - It displays much more details with one call
+  - It allows to access related classes/attributes
+ 
+  _Debug mode in progress, i want to provide two ways : breakpoints and snapshots_ 
+  - _breakpoints pause the current script til window is closed_
+  - _snapshots let the script run, and save/gather logged objects as tabs_
 
 This module is written with IronPython which supports many DLL on windows, especially WPF, Winforms or Revit API.
 I used them a lot to build and test this tool itself.
 
+- __Change the API targets easily :__
 
+   - Enable existing target to display the base node in treeview
+   - You can replace targets with any module (read from sys.modules or try an import)
+
+![](iph/doc/capture_options.png)
 
 ### WARNING 
 
@@ -31,7 +52,7 @@ please report anything going wrong.
 
 I'm sorry if the present code offends you or anybody, warn me if you loose an eye.
 
-# Usage
+# Setup & Usage
 
 
 ### Standalone 
@@ -79,9 +100,12 @@ iph.go(__revit__) # analyses Application class
 
 ### Debug/ Snapshots Mode
 
-  - Ironpython must be installed
-  - copy the folder in your python project, or next to your script
-  - use the following commands to trigger snapshots (snap() + go())
+  - ironpython must be installed
+  - copy the folder in a directory known by sys.path (default C:\Program Files (x86)\IronPython 2.7\Lib)
+  - or copy the folder in your python project, or next to your script
+  - use the following commands to trigger snapshots 
+ 
+_breakpoint mode can be used with iph.go() but it's oneshot for now_
     
 ```python
 import iph
@@ -96,7 +120,7 @@ iph.snap(var_halfway)
 
 iph.snap(var_after) # snapshot after code exec
 
-iph.go() # display results at the end of the command/script
+iph.go() # display results at the end
 
 
 # short way:
@@ -105,22 +129,26 @@ iph.snap(var_before)
 iph.go(var_after)
 ```
 
-# NOTES
 
-- The tree displays filtered members by default (select a node and change filter in the datagrid to display all members)
+# TIPS
 
-- Use keyboard shorcuts to focus nodes in the tree (first letter)
+- Use keyboard to focus nodes in the tree (first letter)
 
-- Filter the rows in datagrid or change the template to display all members
+- Filter the rows in datagrid, or change the template to display all members
 
-- Analysis and output details are based on templates, so it's easy to add new types/behaviors for more accuracy.
+- The tree displays filtered members by default, select a node and change filter in the datagrid to display all members
+
 - An index engine is available for autocompletion, still in work but it's quite effective.
 Please avoid this function on python modules, brakes are broken!
-- if you want test the debug mode to contribute :
-  - launch iph with iph.debug() 
+
+- Analysis and output details are based on templates, so it's easy to add new types/behaviors for more accuracy.
+
+- if you want to test the debug mode to contribute :
+  - launch iph with iph.debug() to activate the logger
   - press F10 on some selected controls to display details
   - unit tests are quite basic for now, but it helps to spot basic functionnal bugs.
   
+# NOTES  
 I tried WPF with this project and finally it helped me __a lot__ to 
 understand bindings and relationship between the several classes, and also spot some convenient attributes (like DataContext on every controls)
 Did i understand wpf the right way ? The question remains. 

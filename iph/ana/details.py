@@ -51,13 +51,13 @@ def get_indexer_doc(refobject): #
     ''' indexer  getset_descriptor
     '''
     doc = get_doc(refobject)
-    doc += '\n' + refobject.PropertyType.__doc__
+    doc += '\n' + str(refobject.PropertyType.__doc__)
     return doc
 
 def get_std_doc(refobject):
     ''' str, bool int float ...
     '''
-    return 'Builtin : '+ type(refobject).__name__
+    return 'Builtin : '+ str(type(refobject).__name__)
 
 def get_class_doc(refobject):
     doc = str(refobject.__doc__)

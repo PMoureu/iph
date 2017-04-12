@@ -6,14 +6,13 @@ from iph.core.basemodel import ModelObject
 from System.Windows import Window
 
 
-def test_02_instance_tabitem():
-    res = TabViewItem(ModelObject(Window(),'win'))
+def test_01_instance_tabitem():
+    res = TabViewItem(ModelObject('simple'))
     assert isinstance(res, TabViewItem)
-    assert len(res.datagrid)
 
-def test_01_update_grid_with_huge_members():
+def test_02_update_grid_with_huge_members():
     man = Manager()
     man.modelview = modelview.ModelView(man)
     res = TabViewItem(ModelObject(ui.MainForm(man),'win'))
-    assert len(res.datagrid)
+    assert len(res.datagrid) > 0
 

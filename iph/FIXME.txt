@@ -1,7 +1,13 @@
 
+- debug mode :
+ breakpoints : workaround application.run or show to display win and pause script
+ snapshot 
+
+
+
+- get_list_val with Orientation type on walls
 - prevent tab refresh on select
 
-- add get_rout_event_doc
 - add event members template
 
 - add 2 templates on model, tree/datagrid,

@@ -244,7 +244,7 @@ TYPES_TABLE = {
 
 'instance':{'icon': 'class',
               'category' : 'instance',
-             'members' : None,
+             'members' : get_members_default,
              'value' : get_std_value,
              'doc' : get_doc
              },

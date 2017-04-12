@@ -11,15 +11,14 @@ def dbg_timercheck(function):
         result = function(*args, **kwargs)
         t1 = time.time()
         if t1-t0 > 0.005:
-            print ("Total %s: %s seconds" %
-                   (function.func_name, str(t1-t0))
-                   + repr(args))
+            print ("Timer Warning !! %s: %s s." %
+                   (function.func_name, str(t1-t0)))
             
         return result
     return function_timer
 
 
-def dbg_timertest(function):
+def dbg_timer(function):
     @wraps(function)
     def function_timer(*args, **kwargs):
         
@@ -27,8 +26,7 @@ def dbg_timertest(function):
         result = function(*args, **kwargs)
         t1 = time.time()
         print ("Test Total %s: %s seconds" %
-                (function.func_name, str(t1-t0))
-                + repr(args))
+                (function.func_name, str(t1-t0)) + repr(args))
             
         return result
     return function_timer

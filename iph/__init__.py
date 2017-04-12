@@ -29,9 +29,9 @@ def go(target=None):
             SESSION.modelview.init(target)
         SESSION.start_app()
     else:
-        man = Manager()
-        man.init_components(target)
-        man.start_app()
+        SESSION = Manager()
+        SESSION.init_components(target)
+        SESSION.start_app()
 
 def start(target=None):
     ''' init component to accept snapshots

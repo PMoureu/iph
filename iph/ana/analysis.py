@@ -72,15 +72,10 @@ def is_iterable(refobject):
     ''' test more efficient than checking dir(object) with huge class
     '''
     is_iter = False
-    #try:
-    #    len(refobject) #refobject.__iter__
-    #    is_iter = True
-    #except:
-    #    pass
     try:
         for e in refobject: 
-            is_iter = True
             break
+        is_iter = True
     except:
         pass
 

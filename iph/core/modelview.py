@@ -15,13 +15,10 @@ from iph.core import BaseNotifier
 #                               #
 
 class ModelView(BaseNotifier):
-    ''' Central Model view, holds the tabs list and delegates
-    the tree logic to treemanager (datacontext is set in xaml)
-    also relays events notified by all subviews
-    
-        interface:
-        - settings/api targets
-        - autocompletion
+    ''' Central Model view, relays all events notified by subviews
+        - holds the tabs list
+        - delegates the tree logic to treemanager (datacontext is set in xaml)
+        - manage autocompletion list (groups all enabled indexes)
 
     '''
 

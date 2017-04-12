@@ -33,6 +33,9 @@
     <Compile Include="iph\core\treeoption.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="iph\doc\setup.md">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="iph\tests\test_04_tabs.py">
       <SubType>Code</SubType>
     </Compile>
