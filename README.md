@@ -30,8 +30,6 @@ You can apply this to :
   - _breakpoints pause the current script til window is closed_
   - _snapshots let the script run, and save/gather logged objects as tabs_
 
-This module is written with IronPython which supports many DLL on windows, especially WPF, Winforms or Revit API.
-I used them a lot to build and test this tool itself.
 
 - __Change the API targets easily :__
 
@@ -39,6 +37,8 @@ I used them a lot to build and test this tool itself.
    - You can replace targets with any module (read from sys.modules or try an import)
 
 ![](iph/doc/capture_options.png)
+This module is written with IronPython which supports many DLL on windows, especially WPF, Winforms or Revit API.
+I used them a lot to build and test this tool itself.
 
 ### WARNING 
 
