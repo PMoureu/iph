@@ -1,11 +1,23 @@
 # iph - Ironic Python Helper
 
-Half lookup, half doc reader, half visual debugger, these 3 halves are helpfull 
-when you're dealing with huge .NET frameworks or Python modules.
+_iph_ provides a visual representation of any object called in a Python script,
+and also extracts any available documentation.
 
-In few words, iph extracts doc and also provides a visual representation of any object called in a Python script.
+It could be helpfull when you're dealing with huge .NET frameworks or Python modules.
 
 You can apply this to :
+
+- __Inspect any object in the context of a running script, or an application like Revit:__
+
+  - Really helpfull if you have access to a shell/console (or by pluging the launcher with a macro)
+  - It displays values of attributes (with a direct access to doc)
+  - It replaces the usual _print()_ by displaying much more details with one call
+  - You can jump to any related attributes or classes by opening other tabs
+  (click on the icon) 
+  
+![](iph/doc/capture_revit.png)
+
+
 - __Read APIs doc like a .chm reader:__ 
   - It extracts internal doc of all classes and attributes
   - It offers an offline access to doc (faster ?)
@@ -13,44 +25,10 @@ You can apply this to :
   
 ![](iph/doc/capture.png)
 
-- __Get Objects informations in the context of a running application like Revit:__
+_i'm currently working to provide two ways of analysis :_ _**breakpoints** and **snapshots**_
+   - _**breakpoints** `go()` pause the current script til window is closed_
+   - _**snapshots** `snap()` let the script run, and save/gather logged objects in tabs_
 
-  - Really helpfull if you have access to a shell/console (or by pluging the launcher to any macro)
-  - Direct access to doc, plus it displays values of attributes
-
-![](iph/doc/capture_revit.png)
-
-- __Debug or Flesh out any object/class in a script:__
-
-  - It replaces usual logs with print()
-  - It displays much more details with one call
-  - It allows to access related classes/attributes
- 
-  _Debug mode in progress, i want to provide two ways : breakpoints and snapshots_ 
-  - _breakpoints pause the current script til window is closed_
-  - _snapshots let the script run, and save/gather logged objects as tabs_
-
-
-- __Change the API targets easily :__
-
-   - Enable existing target to display the base node in treeview
-   - You can replace targets with any module (read from sys.modules or try an import)
-
-![](iph/doc/capture_options.png)
-This module is written with IronPython which supports many DLL on windows, especially WPF, Winforms or Revit API.
-I used them a lot to build and test this tool itself.
-
-### WARNING 
-
-The module is not ready yet, it runs quite well, 
-but not enough to create an installer or add the tag _beta version_.
-
-I wonder if the approach is safe, it only reads the references, i'm not aware of any risk involved.
-
-I try to make this app display no lies about class members and details, the main approach may be too basic for your needs,
-please report anything going wrong. 
-
-I'm sorry if the present code offends you or anybody, warn me if you loose an eye.
 
 # Setup & Usage
 
@@ -76,6 +54,8 @@ iph.go(any_object_in_a_script) # direct inspection
 
 
 ### In Revit
+Now _iph_ displays the parameters names and values of the families objects. 
+
 Setup is easy inside RevitPythonShell or PyRevit :
   - RPS :
     - just copy the main folder in a directory known by RPS
@@ -95,7 +75,6 @@ iph.go(__revit__) # analyses Application class
   - PyRevit : 
     - clean way in progress
     
-
 
 
 ### Debug/ Snapshots Mode
@@ -148,26 +127,36 @@ Please avoid this function on python modules, brakes are broken!
   - press F10 on some selected controls to display details
   - unit tests are quite basic for now, but it helps to spot basic functionnal bugs.
   
-# NOTES  
-I tried WPF with this project and finally it helped me __a lot__ to 
-understand bindings and relationship between the several classes, and also spot some convenient attributes (like DataContext on every controls)
-Did i understand wpf the right way ? The question remains. 
+- __Change the API targets easily :__
 
-I really need some feedback about the main pattern or how i could improve stability.
+   - Enable existing target to display the base node in treeview
+   - You can replace targets with any module (read from sys.modules or try an import)
+
+![](iph/doc/capture_options.png)  
+
+  
+# NOTES  AND WARNING
+
+The whole code could change at any time.
+
+This module is written with IronPython which supports many DLL on windows, especially WPF, Winforms or Revit API.
+I used them a lot to build and test this tool itself.
+
+I try to make this app display no lies about class members and details, the main approach may be too basic for your needs,
+please report anything going wrong. 
+
+I'm sorry if the present code offends you or anybody, warn me if you loose an eye.
 
 All of this works thanks to IronPython reflexion.
-Iph only holds this mirror to inspect objects, 
+_iph_ holds this mirror to inspect objects, 
 you'll obtain _basically_ the same informations with a dir()/getattr loop in a console.
 
 The IronPython layer is sugar, 
 but some limitations force to work around the base concept. 
 I won't bore you with the Allegory of the Cave but it's quite the same, what you see is not really what you get.
 
-Also, some functions are leaky with huge objects (or it's the whole pattern ?) so i started to dig into gc.collect.
-My new favorite passion is looking at perf charts falling down!
-Any comment is welcome to help me spot these weaknesses.
-
 Any contribution is welcome by the way.
+
 
 ## Many Thanks to:
 - [IronPython Team](https://github.com/IronLanguages)

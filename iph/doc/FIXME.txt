@@ -1,0 +1,36 @@
+
+- debug mode :
+ breakpoints : workaround application.run or show to display win and pause script
+ snapshot 
+
+
+
+- get_list_val with Orientation type on walls
+- prevent tab refresh on select
+
+- add event members template
+
+- add 2 templates on model, tree/datagrid,
+ --> select restricted for tree and light for datagrid
+ --> allow toggle on the tree too
+
+
+
+- close a non selected tab takes 2 clicks
+
+
+- press * on roots treenode or module
+
+- add/remove  options in treemanager
+- way to distinc python event/method
+- revit : app exceptions handle /closing app
+
+
+TODO :
+ - list model in tab to allow history (combobox)
+
+ - easy way to add new dll or module, dialog to give path 
+	-->python add to sys.path
+	--> dll clr addreferences
+
+ - drag tabs out

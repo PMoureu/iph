@@ -1,8 +1,9 @@
 from System.ComponentModel import PropertyChangedEventArgs, INotifyPropertyChanged
 
+
 class BaseNotifier(INotifyPropertyChanged):
-    ''' Base class for all modelviews 
-    '''
+    """ Base class for all modelviews
+    """
     def __init__(self):
         self._events = []
 
@@ -14,6 +15,4 @@ class BaseNotifier(INotifyPropertyChanged):
 
     def NotifyPropertyChanged(self, field):
         for event in self._events:
-            event(self,PropertyChangedEventArgs(field))
-
-
+            event(self, PropertyChangedEventArgs(field))

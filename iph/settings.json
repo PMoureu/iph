@@ -21,7 +21,7 @@
             "path": "IronPython"
         }, 
         {
-            "enabled": true, 
+            "enabled": false, 
             "name": "__main__", 
             "path": "__main__"
         }, 
@@ -31,15 +31,15 @@
             "path": "sys.modules"
         }, 
         {
-            "enabled": false, 
+            "enabled": true, 
             "name": "CLR", 
             "path": "clr.References"
         }
     ], 
     "window": {
-        "Height": 671.0, 
-        "Left": 286.0, 
-        "Top": 216.0, 
+        "Height": 703.0, 
+        "Left": 302.0, 
+        "Top": 77.0, 
         "Width": 1080.0
     }
 }

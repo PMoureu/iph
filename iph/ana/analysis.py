@@ -5,12 +5,12 @@ from anatable import *
 
 
 def get_model_details(refobject):
-    ''' main funnel to choose the best model representation
+    """ main funnel to choose the best model representation
         based on object's type
-    '''
+    """
     typename = type(refobject).__name__
 
-    if TYPES_TABLE.has_key(typename):
+    if typename in TYPES_TABLE:
 
         details = TYPES_TABLE[typename]
 
@@ -40,13 +40,13 @@ def get_model_details(refobject):
             logger.debug('TODO get_model_details for CLR/type: {}  ({})'.format(
                 typename, refobject))
 
-    elif is_iterable(refobject): # match all collection types
+    elif is_iterable(refobject):  # match all collection types
         details = TYPES_TABLE['listtype']
 
-    elif clr.GetClrType(type(refobject)).IsEnum: # match sub enum types
+    elif clr.GetClrType(type(refobject)).IsEnum:  # match sub enum types
         details = TYPES_TABLE['subenumtype']
 
-    elif clr.GetClrType(type(refobject)).IsClass: # match sub class types
+    elif clr.GetClrType(type(refobject)).IsClass:  # match sub class types
         if clr.GetClrType(type(refobject)).FullName.startswith('Autodesk.Revit.DB'):
             details = TYPES_TABLE['revitclass']
         else:
@@ -68,9 +68,10 @@ def get_model_details(refobject):
 
     return details
 
+
 def is_iterable(refobject):
-    ''' test more efficient than checking dir(object) with huge class
-    '''
+    """ test more efficient than checking dir(object) with huge class
+    """
     is_iter = False
     try:
         for e in refobject: 
@@ -80,5 +81,3 @@ def is_iterable(refobject):
         pass
 
     return is_iter
-
-

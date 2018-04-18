@@ -1,4 +1,5 @@
-''' This file contains the base model class used in tree, tabs and datagrid.
+"""
+    This file contains the base model class used in tree, tabs and datagrid.
 
     Special note : 
     search of __doc__ can be very slow with many members or some types,
@@ -7,7 +8,7 @@
     value and doc are only used by tabs and gridrow so the model holds a template
     to avoid overloading the tree with potential huge values.
 
-'''
+"""
 
 from iph import logger
 from iph.ana.details import get_member_name
@@ -20,16 +21,16 @@ from config import img_tree
 #                               #
 
 class ModelObject(object):
-    ''' represents an ironpython object 
+    """ represents an ironpython object
         model for node element, tab, and gridrow
 
         init with a ref and a name if possible (given by dir() )
-    '''
+    """
     def __init__(self, ref_object, name=''):
-        ''' args: 
+        """ args:
             ref_object : direct reference
             name: str
-        '''
+        """
         super(ModelObject, self).__init__()
 
         self.ref = ref_object
@@ -63,6 +64,3 @@ class ModelObject(object):
         if not val:
             val = 'n/a'
         return val
-
-
-

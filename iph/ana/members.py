@@ -1,16 +1,17 @@
 import clr
 from iph import logger
-from excluds import *
+import excluds
+
 
 #                               #
 #     DEFAULT FILTER TEMPLATE
 #                               #
 
 def get_members_default(refobject):
-    ''' default template filter
+    """ default template filter
         display all members except builtins and magic
-    '''
-    dir_obj = sorted(set(dir(refobject)) - SET_BUILT)
+    """
+    dir_obj = sorted(set(dir(refobject)) - excluds.ATTR_OBJECT)
     
     for member in dir_obj:
         try:
@@ -19,8 +20,7 @@ def get_members_default(refobject):
         except Exception as error:
             ref_member = None
             member += ' ! no access !'
-            
-            logger.debug('get_members_default : '+ member + str(error))
+            logger.debug('get_members_default : ' + member + str(error))
 
         finally:
             yield (member, ref_member)
@@ -31,10 +31,10 @@ def get_members_default(refobject):
 
 
 def get_members_filt_revit(refobject):
-    ''' display all members except inherited from Element
+    """ display all members except inherited from Element
         
-    '''
-    dir_obj = sorted(set(dir(refobject)) - SET_REVIT)
+    """
+    dir_obj = sorted(set(dir(refobject)) - excluds.ATTR_REVIT)
     
     for member in dir_obj:
         try:
@@ -43,8 +43,7 @@ def get_members_filt_revit(refobject):
         except Exception as error:
             ref_member = None
             member += ' ! no access !'
-            
-            logger.debug('method get_members_filt_revit :'+ member + str(error))
+            logger.debug('method get_members_filt_revit :' + member + str(error))
 
         finally:
             yield (member, ref_member)
@@ -55,8 +54,8 @@ def get_members_filt_revit(refobject):
 
 
 def get_members_no_filter(refobject):
-    ''' default no filtered template using dir()
-    '''
+    """ default no filtered template using dir()
+    """
     for member in dir(refobject):
         try:
             ref_member = getattr(refobject, member)
@@ -64,15 +63,15 @@ def get_members_no_filter(refobject):
         except Exception as error:
             ref_member = None
             member += ' ! no access !'
-            
-            logger.debug('get_members_no_filter :'+ member + str(error))
+            logger.debug('get_members_no_filter :' + member + str(error))
 
         finally:
             yield (member, ref_member)
 
+
 def get_members_enum(enumobject):
-    ''' template for enum types
-    '''
+    """ template for enum types
+    """
     try:
         lst_enum = enumobject.GetEnumNames()
     except:
@@ -81,9 +80,10 @@ def get_members_enum(enumobject):
     for nameoption in lst_enum:
         yield (nameoption, None)
 
+
 def get_members_subenum(enumobject):
-    ''' template for enum types
-    '''
+    """ template for enum types
+    """
     try:
         lst_enum = type(enumobject).GetEnumNames()
     except:
@@ -92,27 +92,25 @@ def get_members_subenum(enumobject):
     for nameoption in lst_enum:
         yield (nameoption, None)
 
+
 def get_list_members(refobject):
-    ''' readable and indexed template for list type
+    """ readable and indexed template for list type
         Limited to the 200 first items
-    '''
+    """
     
     for ind, item in enumerate(refobject):
         if ind > 200:
             break
-        yield (str(ind) +': '+ str(item), item)
+        yield (str(ind) + ': ' + str(item), item)
 
 
 def get_dict_members(refobject):
-    '''readable and indexed template for dict type
+    """readable and indexed template for dict type
         Limited to the 200 first items
-    '''
+    """
     ind = 0
     for key, val in refobject.items():
         ind += 1
         if ind > 200:
             break
         yield (str(key), val)
-
-
-

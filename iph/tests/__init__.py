@@ -1,17 +1,17 @@
-''' unittest what ??
+""" unittest what ??
     at beginning i created a simple context manager to wrap basics tests
     with 3 or 4 constants more, and the file discover, it's really easy to
     add news tests
-'''
+"""
 import sys
 import importlib
 from iph import logger
 from iph.utils.tools import dbg_timercheck
 
 def discover_and_run(verbose=False):
-    ''' loads all 'test_*' files and performs all 'test_*' functions
+    """ loads all 'test_*' files and performs all 'test_*' functions
         
-    '''
+    """
     if verbose:
         logger.verbose(True)
     logger.title('Test all components')

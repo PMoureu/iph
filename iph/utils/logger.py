@@ -1,13 +1,13 @@
-'''
+"""
     
     This file comes from the project RevitPythonWrapper, written by Gui Talarico
     https://github.com/gtalarico
 
     I used this logger to start the project without spending hours to setup a new one.
-    Many thanks to provide ready-to-use tools!
+    Many thanks to Gui Talarico for providing ready-to-use tools!
 
     
-'''
+"""
 import sys
 
 class mockLoggerWrapper():
@@ -55,7 +55,7 @@ class LoggerWrapper():
         formatter = logging.Formatter("[%(levelname)s] %(message)s")
         handler.setFormatter(formatter)
 
-        logger = logging.getLogger('rpw_logger')
+        logger = logging.getLogger('iph_logger')
         logger.addHandler(handler)
         logger.setLevel(logging.INFO)
 
@@ -63,7 +63,7 @@ class LoggerWrapper():
         formatter_title = logging.Formatter("%(message)s")
         handler_title.setFormatter(formatter_title)
 
-        logger_title = logging.getLogger('rpw_logger_title')
+        logger_title = logging.getLogger('logger_title')
         logger_title.addHandler(handler_title)
         logger_title.setLevel(logging.INFO)
 
@@ -103,6 +103,7 @@ class LoggerWrapper():
 
     def setLevel(self, level):
         self._logger.setLevel(level)
+
 
 try:
     import logging
