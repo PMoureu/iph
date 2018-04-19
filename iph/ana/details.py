@@ -22,6 +22,19 @@ def get_member_name(refobject):
     
     return member_name
 
+def get_revit_parameter_name(refobject):
+    try:
+        member_name = 'Param : ' + refobject.Definition.Name
+    except Exception as error:
+        logger.debug('get_revit_parameter_name :' + str(error))
+        member_name = str(refobject)
+
+    # add value in name
+    try:
+        member_name += ' ({})'.format(refobject.AsValueString())
+    except:
+        pass
+    return member_name
 
 #                               #
 #          DOC TEMPLATES
@@ -143,3 +156,13 @@ def get_std_value(refobject):
         value = repr(refobject)
 
     return value
+
+
+def get_revit_parameter_value(refobject):
+    try:
+        value = refobject.AsValueString()
+    except:
+        value = repr(refobject)
+
+    return value
+

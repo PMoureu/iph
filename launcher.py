@@ -9,8 +9,11 @@ except Exception as e:
     traceback.print_exc()
 
 
-# snapshots pattern
+
+# snapshots pattern:
+
 #import iph
+
 #a = UFO_object
 #iph.snap(a)
 

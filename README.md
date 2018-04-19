@@ -1,19 +1,18 @@
 # iph - Ironic Python Helper
 
 _iph_ provides a visual representation of any object called in a Python script,
-and also extracts any available documentation.
-
-It could be helpfull when you're dealing with huge .NET frameworks or Python modules.
+and extracts any available documentation.
+It can be helpfull when you're dealing with huge .NET frameworks or Python modules.
 
 You can apply this to :
 
-- __Inspect any object in the context of a running script, or an application like Revit:__
+- __Inspect any object in the context of a running script, or applications like Revit:__
 
   - Really helpfull if you have access to a shell/console (or by pluging the launcher with a macro)
   - It displays values of attributes (with a direct access to doc)
   - It replaces the usual _print()_ by displaying much more details with one call
   - You can jump to any related attributes or classes by opening other tabs
-  (click on the icon) 
+  (_click on the left icon on grid_) 
   
 ![](iph/doc/capture_revit.png)
 
@@ -137,13 +136,11 @@ Please avoid this function on python modules, brakes are broken!
   
 # NOTES  AND WARNING
 
-The whole code could change at any time.
-
 This module is written with IronPython which supports many DLL on windows, especially WPF, Winforms or Revit API.
 I used them a lot to build and test this tool itself.
 
 I try to make this app display no lies about class members and details, the main approach may be too basic for your needs,
-please report anything going wrong. 
+please report anything going wrong. The whole code could change at any time.
 
 I'm sorry if the present code offends you or anybody, warn me if you loose an eye.
 

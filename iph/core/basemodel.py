@@ -32,13 +32,16 @@ class ModelObject(object):
             name: str
         """
         super(ModelObject, self).__init__()
-
         self.ref = ref_object
         self.type = type(self.ref).__name__
-        self.name = name if name else get_member_name(self.ref)
 
         details = get_model_details(self.ref)
-
+        if 'name' in details:
+            self.name = details['name'](self.ref)
+        elif name:
+            self.name = name
+        else:
+            self.name = get_member_name(self.ref)
         self.icon = img_tree[details['icon']]
         self.category = details['category']
         self.templ_members = details['members']
