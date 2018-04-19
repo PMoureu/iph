@@ -387,6 +387,20 @@ TYPES_TABLE = {
         'members': get_members_default,
         'value': get_std_value,
         'doc': get_doc
-    }
+    },
+
+    #                               #
+    #            CUSTOM TYPES
+    #                               #
+
+    'revitparameter': {
+        'name': get_revit_parameter_name,
+        'icon': 'class',
+        'category': 'parameter',
+        'members': get_members_default,
+        'value': get_revit_parameter_value,
+        'doc': get_doc
+    },
+
 
 }

@@ -19,10 +19,11 @@ def get_model_details(refobject):
 
         if clrtype.IsEnum:
             details = TYPES_TABLE['enumtype']
-            
+
         elif clrtype.IsClass:
             if clrtype.FullName.startswith('Autodesk.Revit.DB'):
                 details = TYPES_TABLE['revitclass']
+
             else:
                 details = TYPES_TABLE['classtype']
 
@@ -40,14 +41,21 @@ def get_model_details(refobject):
             logger.debug('TODO get_model_details for CLR/type: {}  ({})'.format(
                 typename, refobject))
 
-    elif is_iterable(refobject):  # match all collection types
+    # match all list/collection types
+    elif is_iterable(refobject):
         details = TYPES_TABLE['listtype']
 
-    elif clr.GetClrType(type(refobject)).IsEnum:  # match sub enum types
+    # match sub enum types
+    elif clr.GetClrType(type(refobject)).IsEnum:
         details = TYPES_TABLE['subenumtype']
 
-    elif clr.GetClrType(type(refobject)).IsClass:  # match sub class types
-        if clr.GetClrType(type(refobject)).FullName.startswith('Autodesk.Revit.DB'):
+    # match sub class types
+    elif clr.GetClrType(type(refobject)).IsClass:
+
+        if clr.GetClrType(type(refobject)).FullName == 'Autodesk.Revit.DB.Parameter':
+            details = TYPES_TABLE['revitparameter']
+
+        elif clr.GetClrType(type(refobject)).FullName.startswith('Autodesk.Revit.DB'):
             details = TYPES_TABLE['revitclass']
         else:
             details = TYPES_TABLE['subclasstype']
